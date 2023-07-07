@@ -24,7 +24,7 @@ async function validateMovieIdExists(req, res, next){
     }else{
         next({
             status: 404,
-            message: "Movie cannot be found."
+            message: { error: "Movie cannot be found." }
         })
     }
 }

@@ -1,13 +1,15 @@
 if (process.env.USER) require("dotenv").config();
 const express = require("express");
 const app = express();
-const moviesRouter = require("./movies/movies.router")
+const moviesRouter = require("./movies/movies.router");
+
+app.use(express.json());
 
 app.use("/movies", moviesRouter);
 
 // Not found handler
 app.use((req, res, next) => {
-    res.send(`The route ${req.originalUrl} does not exist!`)
+    next({ status: 404, message: `Path not found: ${request.originalUrl}` });
 })
 
 // Error handling

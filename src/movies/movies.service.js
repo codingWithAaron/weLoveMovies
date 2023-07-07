@@ -5,11 +5,11 @@ function list(){
 }
 
 function listIsShowing(){
-    return knex("movies")
-        .select("*")
-        .join("movies_theaters", "movies.movie_id", "movies_theaters.movie_id")
-        .join("theaters", "movies_theaters.theater_id", "theaters.theater_id")
-        .where({is_showing: true})
+    return knex("movies as m")
+        .select("m.movie_id", "m.title", "m.runtime_in_minutes", "m.rating", "m.description", "m.image_url")
+        .join("movies_theaters", "m.movie_id", "movies_theaters.movie_id")
+        .where({"movies_theaters.is_showing": true})
+        .groupBy("m.movie_id");
 }
 
 module.exports = {

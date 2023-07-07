@@ -9,7 +9,7 @@ app.use("/movies", moviesRouter);
 
 // Not found handler
 app.use((req, res, next) => {
-    next({ status: 404, message: `Path not found: ${request.originalUrl}` });
+    next({ status: 404, message: `Path not found: ${req.originalUrl}` });
 })
 
 // Error handling

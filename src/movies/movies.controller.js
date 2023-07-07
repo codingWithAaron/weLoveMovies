@@ -11,6 +11,25 @@ async function list(req, res, next){
     }
 }
 
+async function read(req, res, next){
+    const {movieId} = req.params
+    const data = await service.read(movieId)
+    res.json({data})
+}
+
+async function validateMovieIdExists(req, res, next){
+    const movie = await service.read(req.params.movieId)
+    if(movie){
+        next()
+    }else{
+        next({
+            status: 404,
+            message: "Movie cannot be found."
+        })
+    }
+}
+
 module.exports = {
-    list
+    list,
+    read: [validateMovieIdExists, read]
 }

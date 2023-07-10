@@ -3,6 +3,7 @@ const service = require("./reviews.service");
 async function validateReviewIdExists(req, res, next){
     const review = await service.read(req.params.reviewId)
     if(review){
+        res.locals.review = review
         next()
     }else{
         next({
@@ -18,6 +19,18 @@ async function destroy(req, res, next){
     res.sendStatus(204)
 }
 
+async function update(req, res, next){
+    const updatedReview = {
+        ...res.locals.review,
+        ...req.body.data,
+        review_id: res.locals.review.review_id,
+    };
+    const data = await service.update(updatedReview);
+    console.log(data)
+    res.json({data})
+}
+
 module.exports = {
-    delete: [validateReviewIdExists, destroy]
+    delete: [validateReviewIdExists, destroy],
+    update: [validateReviewIdExists, update]
 };

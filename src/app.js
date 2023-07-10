@@ -11,13 +11,13 @@ app.use("/reviews", reviewsRouter)
 
 // Not found handler
 app.use((req, res, next) => {
-    next({ status: 404, message: `Path not found: ${req.originalUrl}` });
+    res.status(404).json({ error: `Path not found: ${req.originalUrl}` });
 })
 
 // Error handling
 app.use((error, req, res, next) => {
     const { status = 500, message = `Internal server error`} = error;
-    res.status(status).send(message)
+    res.status(status).send(message);
 })
 
 module.exports = app;

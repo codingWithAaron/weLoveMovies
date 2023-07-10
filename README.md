@@ -4,4 +4,4 @@ WeLoveMovies is a backend project that focused on building a database and buildi
 
 # Tools and Technology
 
-ElephantSQL, Express, Knex, Render, CORS, JavaScript
+ElephantSQL, Express, Knex, Node, Render, CORS, JavaScript

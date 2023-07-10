@@ -29,7 +29,21 @@ async function validateMovieIdExists(req, res, next){
     }
 }
 
+async function readTheatersForMovieId(req, res, next){
+    const {movieId} = req.params
+    const data = await service.readTheatersForMovieId(movieId)
+    res.json({data})
+}
+
+async function readReviewsForMovieId(req, res, next){
+    const {movieId} = req.params
+    const data = await service.readReviewsForMovieId(movieId)
+    res.json({data})
+}
+
 module.exports = {
     list,
-    read: [validateMovieIdExists, read]
+    read: [validateMovieIdExists, read],
+    readTheatersForMovieId:[validateMovieIdExists, readTheatersForMovieId],
+    readReviewsForMovieId: [validateMovieIdExists, readReviewsForMovieId]
 }
